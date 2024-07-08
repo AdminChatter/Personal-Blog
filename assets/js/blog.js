@@ -1,6 +1,7 @@
 // blog.js
 
-// TODO: Create a variable that selects the main element, and a variable that selects the back button element
+// TODO: Create a variable that selects the main element, and a variable that selects the back button element\
+const mainElement = document.querySelector('main');
 const ulElement = document.getElementById('main-ul');
 const backButton = document.getElementById('back');
 
@@ -13,15 +14,15 @@ const createBlogPostElement = (blogData) => {
     article.classList.add('card');
 
     const title = document.createElement('h2');
-    title.textContent = blogData.blogTitle;
+    title.textContent = blogData.title;
     article.appendChild(title);
 
     const content = document.createElement('blockquote');
-    content.textContent = blogData.blogContent;
+    content.textContent = blogData.content;
     article.appendChild(content);
 
     const author = document.createElement('p');
-    author.textContent = `Post by: ${blogData.userName}`;
+    author.textContent = `Post by: ${blogData.username}`;
     article.appendChild(author);
 
     listItem.appendChild(article);
@@ -32,13 +33,13 @@ const createBlogPostElement = (blogData) => {
 const displayNoPostsMessage = () => {
     const message = document.createElement('p');
     message.textContent = "No Blog posts yet...";
-    ulElement.appendChild(message);
+    mainElement.appendChild(message);
 };
 
 // TODO: Create a function called `renderBlogList` that renders the list of blog posts if they exist. If not, call the no posts function.
 const renderBlogList = () => {
-    const blogData = readLocalStorage('blogs');
-    if (blogData.length === 0) {
+    let blogData = JSON.parse(localStorage.getItem('blogs'))
+    if (!blogData) {
         displayNoPostsMessage();
     } else {
         blogData.forEach(createBlogPostElement);

@@ -7,23 +7,24 @@ const form = document.querySelector('form');
 const formSubmission = (event) => {
     event.preventDefault();
 
-    const userName = document.getElementById('username').value;
-    const blogTitle = document.getElementById('title').value;
-    const blogContent = document.getElementById('content').value;
+    const username = document.getElementById('username').value;
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+    const errorMSG = document.getElementById('error')
 
-    if (!userName || !blogTitle || !blogContent) {
-        window.alert("Please complete the form.");
+    if (!username || !title || !content) {
+        errorMSG.textContent = ('Please complete the form.');
         return;
+    }else{
+        const blogData = {
+            username,
+            title,
+            content,
+        };
+    
+        storeLocalStorage('blogs', blogData);
+        redirectPage('blog.html');
     }
-
-    const blogData = {
-        userName,
-        blogTitle,
-        blogContent,
-    };
-
-    storeLocalStorage('blogs', blogData);
-    redirectPage('blog.html');
 };
 
 // TODO: Add an event listener to the form on submit. Call the function to handle the form submission.
