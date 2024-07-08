@@ -1,11 +1,14 @@
 // blog.js
 
 // TODO: Create a variable that selects the main element, and a variable that selects the back button element
-const mainElement = document.querySelector('main');
+const ulElement = document.getElementById('main-ul');
 const backButton = document.getElementById('back');
 
 // TODO: Create a function that builds an element and appends it to the DOM
 const createBlogPostElement = (blogData) => {
+    console.log(blogData.title)
+    const listItem = document.createElement('li')
+
     const article = document.createElement('article');
     article.classList.add('card');
 
@@ -18,17 +21,18 @@ const createBlogPostElement = (blogData) => {
     article.appendChild(content);
 
     const author = document.createElement('p');
-    author.textContent = `Post by: ${blogData.userName} on ${blogData.date}`;
+    author.textContent = `Post by: ${blogData.userName}`;
     article.appendChild(author);
 
-    mainElement.appendChild(article);
+    listItem.appendChild(article);
+    ulElement.appendChild(listItem);
 };
 
 // TODO: Create a function that handles the case where there are no blog posts to display
 const displayNoPostsMessage = () => {
     const message = document.createElement('p');
-    message.textContent = 'No blog posts to display.';
-    mainElement.appendChild(message);
+    message.textContent = "No Blog posts yet...";
+    ulElement.appendChild(message);
 };
 
 // TODO: Create a function called `renderBlogList` that renders the list of blog posts if they exist. If not, call the no posts function.
